@@ -32,6 +32,7 @@ public:
     bool coordinateCorrectionFlag;
     string targetFrame;
     string fixedFrame;
+    string robotId;
 
     nh.getParam("pcap_file", pcapFile);
     nh.getParam("server_ip", serverIp);
@@ -49,6 +50,8 @@ public:
     nh.getParam("coordinate_correction_flag", coordinateCorrectionFlag);
     nh.getParam("target_frame", targetFrame);
     nh.getParam("fixed_frame", fixedFrame);
+    nh.getParam("robot_id", robotId);
+    frameId = robotId + "/" + frameId;
   
     if(!pcapFile.empty()){
       hsdk = new PandarGeneralSDK(pcapFile, boost::bind(&HesaiLidarClient::lidarCallback, this, _1, _2, _3), \
